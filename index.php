@@ -3,9 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/png" href="/favicon.ico>
-<link rel="manifest" href="/site.webmanifest">
-<title>Menu Moderno — Microlins</title>
+<title>Menu Microlins</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -258,5 +256,6 @@ modal.addEventListener("click", function(e) {
 </script>
 </body>
 </html>
+
 
 
