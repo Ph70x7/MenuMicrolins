@@ -197,7 +197,7 @@ header.appbar {
   position: relative;
   width: 90%;
   max-width: 700px;
-  transform: scale(1.8);
+  transform: scale(1.7);
 }
 .modal {
   background: var(--card);
@@ -299,4 +299,5 @@ header.appbar {
   transform: scale(0.75) translateY(170vh);
   transform-origin: top center;
   }
+
 }
