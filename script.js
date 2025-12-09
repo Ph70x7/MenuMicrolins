@@ -7,24 +7,25 @@ const pdfFrame = document.getElementById("pdfFrame");
 const downloadLink = document.getElementById("downloadLink");
 const backToList = document.getElementById("backToList");
 
-// Seleciona apenas os botões de ação dentro dos cards (não pega os do modal)
-const cardButtons = document.querySelectorAll(".card .btn-action");
+// AGORA pegamos os CARDS diretamente (não os botões)
+const cards = document.querySelectorAll(".card");
 
-cardButtons.forEach(function(btn) {
-  btn.addEventListener("click", function(e) {
-    e.preventDefault();
-    e.stopPropagation();
+cards.forEach(function(card) {
+  card.addEventListener("click", function(e) {
 
-    const card = this.closest(".card");
-    if (!card) return; // segurança
-
+    e.preventDefault(); // impede o <a href="#"> de recarregar a página
+    
     const nameEl = card.querySelector("h3");
     const name = nameEl ? nameEl.textContent.trim() : "";
 
     const filesRaw = card.dataset.files || "";
-    const files = filesRaw.split(",").map(function(f) { return f.trim(); }).filter(function(f) { return f.length > 0; });
+    const files = filesRaw.split(",").map(function(f) { 
+      return f.trim(); 
+    }).filter(function(f) { 
+      return f.length > 0; 
+    });
 
-    // limpa lista anterior
+    // limpa lista
     modalList.innerHTML = "";
 
     if (files.length === 0) {
@@ -36,7 +37,9 @@ cardButtons.forEach(function(btn) {
         const li = document.createElement("li");
 
         // título do arquivo (nome sem extensão)
-        const titleText = document.createTextNode(file.split("/").pop().replace(".pdf", ""));
+        const titleText = document.createTextNode(
+          file.split("/").pop().replace(".pdf", "")
+        );
         li.appendChild(titleText);
 
         const controls = document.createElement("div");
@@ -47,11 +50,11 @@ cardButtons.forEach(function(btn) {
         viewBtn.className = "btn-action";
         viewBtn.textContent = "👁 Visualizar";
         viewBtn.addEventListener("click", function(ev) {
-          ev.stopPropagation();
+          ev.stopPropagation(); // evita fechar a lista
           openViewer(file);
         });
 
-        // link de download
+        // download
         const downloadA = document.createElement("a");
         downloadA.className = "btn-action";
         downloadA.href = file;
@@ -72,6 +75,7 @@ cardButtons.forEach(function(btn) {
   });
 });
 
+// Viewer
 window.openViewer = function(file) {
   pdfFrame.src = file;
   downloadLink.href = file;
@@ -79,16 +83,19 @@ window.openViewer = function(file) {
   modalViewer.style.display = "flex";
 };
 
+// Voltar
 backToList.addEventListener("click", function() {
   modalViewer.style.display = "none";
   modalList.style.display = "block";
   pdfFrame.src = "";
 });
 
+// Fechar modal
 closeModal.addEventListener("click", function() {
   modal.classList.remove("active");
 });
 
+// Fechar clicando fora
 modal.addEventListener("click", function(e) {
   if (e.target === modal) modal.classList.remove("active");
 });
