@@ -187,7 +187,7 @@ header.appbar {
   z-index: 2000;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s;
+  transition: opacity 0.15s;
 }
 .modal-overlay.active {
   opacity: 1;
@@ -301,4 +301,5 @@ header.appbar {
   }
 
 }
+
 
